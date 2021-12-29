@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using LoggingExtensions;
+using Microsoft.Extensions.Logging;
 
 class Program
 {
@@ -14,9 +15,10 @@ class Program
             
         });
 
-        ILogger _logger = loggerFactory.CreateLogger<Program>();
+        ILogger<Program> _logger = loggerFactory.CreateLogger<Program>();
+        // normal log
         _logger.Log(LogLevel.Information, "test");
-        //using var _ = _logger.TimedLog();
-        Console.ReadKey();
+        // timed logger
+        using var _ = _logger.TimedLogg("timedLog");
     }
 }
